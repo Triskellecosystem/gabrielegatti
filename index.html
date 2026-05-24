@@ -69,7 +69,7 @@ img { display:block; max-width:100% }
   background: linear-gradient(90deg, var(--amber) 0%, #F97316 100%);
   color: white;
   text-align: center;
-  padding: 10px 20px;
+  padding: 11px 16px;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -78,15 +78,58 @@ img { display:block; max-width:100% }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
+  line-height: 1.35;
 }
 .ub-pulse {
   width: 8px; height: 8px;
   background: white;
   border-radius: 50%;
   animation: ub-blink 1.4s ease-in-out infinite;
+  flex-shrink: 0;
 }
 @keyframes ub-blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.ub-content { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center }
+.ub-price-tag {
+  background: white;
+  color: #C2410C;
+  font-weight: 800;
+  padding: 2px 9px;
+  border-radius: 100px;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.ub-old-price {
+  text-decoration: line-through;
+  opacity: 0.75;
+  font-size: 13px;
+  font-weight: 500;
+}
+.ub-spots {
+  background: rgba(0,0,0,0.18);
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Mobile: messaggio ultra-compatto */
+.ub-mobile { display: none }
+.ub-desktop { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center }
+
+@media(max-width: 720px){
+  .urgency-bar { padding: 10px 14px; font-size: 13px; gap: 8px }
+  .ub-desktop { display: none }
+  .ub-mobile { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap }
+  .ub-price-tag { font-size: 12px; padding: 2px 8px }
+  .ub-spots { font-size: 12px; padding: 2px 8px }
+}
+@media(max-width: 380px){
+  .urgency-bar { font-size: 12px; padding: 9px 10px }
+}
+
 .ub-countdown {
   font-size: 13px;
   background: rgba(0,0,0,0.15);
@@ -172,12 +215,10 @@ nav.shadow { box-shadow: 0 4px 40px rgba(10,30,61,0.08) }
   min-height: calc(100vh - 108px);
   background: var(--navy);
   display: grid;
-  grid-template-columns: 1fr 440px;
+  grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
   overflow: hidden;
   position: relative;
-  max-width: 1280px;
-  margin: 0 auto;
 }
 
 /* Texture sfondo */
@@ -199,7 +240,7 @@ nav.shadow { box-shadow: 0 4px 40px rgba(10,30,61,0.08) }
 /* ─ HERO TEXT ─ */
 .hero-l {
   position: relative; z-index:2;
-  padding: 80px 32px 80px 48px;
+  padding: 80px 60px 80px clamp(48px, 7vw, 130px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -408,14 +449,14 @@ nav.shadow { box-shadow: 0 4px 40px rgba(10,30,61,0.08) }
   min-height: 700px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 40px 40px 40px 20px;
+  justify-content: center;
+  padding: 60px clamp(48px, 7vw, 120px) 60px 20px;
 }
 
 .hero-video-wrap {
   position: relative;
   width: 100%;
-  max-width: 340px;
+  max-width: 380px;
   aspect-ratio: 9/16;
 }
 
@@ -1308,43 +1349,40 @@ nav.shadow { box-shadow: 0 4px 40px rgba(10,30,61,0.08) }
 
 .bio-btns { display:flex; gap:12px; flex-wrap:wrap }
 
-/* ─── Feature icons grid nella bio ─── */
+/* Griglia icone riassuntive bio */
 .bio-features {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 40px;
+  gap: 14px;
+  margin-top: 44px;
+  padding-top: 44px;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
-
 .bio-feat {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
-  padding: 20px;
   display: flex;
   align-items: flex-start;
   gap: 14px;
+  padding: 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(107,159,238,0.18);
+  border-radius: 14px;
   transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease);
-  cursor: default;
 }
 .bio-feat:hover {
-  background: rgba(255,255,255,0.07);
-  border-color: rgba(107,159,238,0.3);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(107,159,238,0.45);
   transform: translateY(-3px);
 }
-
 .bio-feat-icon {
   width: 40px; height: 40px;
+  flex-shrink: 0;
   background: rgba(107,159,238,0.12);
   border-radius: 10px;
   display: grid;
   place-items: center;
-  flex-shrink: 0;
   transition: background 0.3s;
 }
-.bio-feat:hover .bio-feat-icon {
-  background: var(--blue);
-}
+.bio-feat:hover .bio-feat-icon { background: var(--blue) }
 .bio-feat-icon svg {
   width: 20px; height: 20px;
   stroke: var(--sky);
@@ -1354,29 +1392,22 @@ nav.shadow { box-shadow: 0 4px 40px rgba(10,30,61,0.08) }
   stroke-linejoin: round;
   transition: stroke 0.3s;
 }
-.bio-feat:hover .bio-feat-icon svg {
-  stroke: white;
-}
-
+.bio-feat:hover .bio-feat-icon svg { stroke: white }
 .bio-feat-text h4 {
   font-size: 14px;
   font-weight: 700;
   color: white;
-  margin-bottom: 4px;
   letter-spacing: -0.01em;
-  font-family: 'Outfit', sans-serif;
-  line-height: 1.2;
+  margin-bottom: 3px;
 }
 .bio-feat-text p {
   font-size: 12px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.45;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.4;
   font-weight: 300;
 }
 
-/* ══════════════════════════════════════
-   METODO
-══════════════════════════════════════ */
+
 /* ══════════════════════════════════════
    VIDEO INSTAGRAM SECTION
 ══════════════════════════════════════ */
@@ -1551,15 +1582,15 @@ nav.shadow { box-shadow: 0 4px 40px rgba(10,30,61,0.08) }
 
 .rev-grid { display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:16px; margin-bottom:48px }
 .rc {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(107,159,238,0.18);
   border-radius:20px; padding:32px;
   display:flex; flex-direction:column; gap:18px;
-  transition: background 0.3s, transform 0.35s var(--ease);
+  transition: background 0.3s, transform 0.35s var(--ease), border-color 0.3s;
   cursor: default;
 }
-.rc:hover { background:rgba(255,255,255,0.07); transform:translateY(-6px) }
-.rc.big { background: rgba(255,255,255,0.06); border-color: rgba(107,159,238,0.2) }
+.rc:hover { background:rgba(255,255,255,0.08); transform:translateY(-6px); border-color:rgba(107,159,238,0.4) }
+.rc.big { background: rgba(255,255,255,0.07); border-color: rgba(107,159,238,0.3) }
 .rc-stars { display:flex; gap:4px }
 .rc-star { width:14px; height:14px; background:#FFC107; clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%) }
 .rc-text { font-size:17px; font-style:italic; color:rgba(255,255,255,0.75); line-height:1.55; font-weight:300; flex:1 }
@@ -1861,12 +1892,19 @@ footer small { width:100%; font-size:11px; color:rgba(255,255,255,0.12) }
 /* ══════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════ */
+/* Schermi molto grandi: limita lo stiramento */
+@media(min-width:1800px){
+  .hero-l { padding-left: clamp(130px, 12vw, 280px); padding-right: 80px }
+  .hero-r { padding-right: clamp(120px, 12vw, 280px) }
+  .hero-video-wrap { max-width: 420px }
+}
+
 /* Media query intermedia: tra 1100 e 1400 riduce la colonna video */
 @media(min-width:1100px) and (max-width:1400px){
-  .hero { grid-template-columns: 1fr 380px }
-  .hero-l { padding: 80px 20px 80px 40px }
-  .hero-r { padding: 40px 32px 40px 16px }
-  .hero-video-wrap { max-width: 300px }
+  .hero { grid-template-columns: 1fr 0.85fr }
+  .hero-l { padding: 80px 32px 80px clamp(40px, 5vw, 64px) }
+  .hero-r { padding: 50px clamp(40px, 5vw, 64px) 50px 16px }
+  .hero-video-wrap { max-width: 320px }
 }
 
 @media(max-width:1100px){
@@ -1891,23 +1929,71 @@ footer small { width:100%; font-size:11px; color:rgba(255,255,255,0.12) }
   .why-layout { grid-template-columns:1fr }
   .approach-head { grid-template-columns:1fr; gap:24px }
   .approach-cards { grid-template-columns:repeat(2,1fr) }
-  .bio-layout { grid-template-columns:1fr }
+  .bio-layout { grid-template-columns:1fr; min-height: auto }
   .bio-photo-col { min-height:auto }
   .photo-stack { padding: 32px 24px 24px; min-height: 440px }
   .ph-card { width: calc(100% - 48px) }
   .bio-timeline { padding: 24px 24px 32px }
   .bio-photo-footer { padding: 0 24px 32px }
   .bio-text-col { padding:60px 32px }
+
+  /* ─ EFFETTO STACKING STICKY: bio features ─ */
+  .bio-features {
+    display: block;
+    grid-template-columns: 1fr;
+    margin-top: 32px;
+    padding-top: 32px;
+  }
+  .bio-feat {
+    position: sticky;
+    top: 90px;
+    margin-bottom: 16px;
+    background: var(--deep);
+    border: 1.5px solid rgba(107,159,238,0.3);
+    box-shadow: 0 -8px 30px rgba(0,0,0,0.3);
+    padding: 22px;
+  }
+  .bio-feat:nth-child(1) { top: 90px }
+  .bio-feat:nth-child(2) { top: 102px }
+  .bio-feat:nth-child(3) { top: 114px }
+  .bio-feat:nth-child(4) { top: 126px }
+  .bio-feat:nth-child(5) { top: 138px }
+  .bio-feat:nth-child(6) { top: 150px }
+  .bio-feat:last-child { margin-bottom: 0 }
+
   .method-grid { grid-template-columns:1fr }
   .m-step { border-right:none; border-bottom:1.5px solid rgba(10,30,61,0.07) }
   .m-step:last-child { border-bottom:none }
-  .rev-grid { grid-template-columns:1fr }
+
+  /* ─ EFFETTO STACKING STICKY: recensioni ─ */
+  .rev-grid {
+    display: block;
+    grid-template-columns:1fr;
+  }
+  .rc {
+    position: sticky;
+    top: 90px;
+    margin-bottom: 18px;
+    background: var(--deep);
+    border: 1.5px solid rgba(107,159,238,0.3);
+    box-shadow: 0 -8px 36px rgba(0,0,0,0.4);
+  }
+  .rc:nth-child(1) { top: 90px }
+  .rc:nth-child(2) { top: 106px }
+  .rc:nth-child(3) { top: 122px }
+  .rc:last-child { margin-bottom: 0 }
+  .rc.big { background: var(--deep) }
   .s-final { padding:80px 24px }
   .final-btns { flex-direction:column; align-items:center }
   .btn-f-primary,.btn-f-wa { width:100%; max-width:420px; justify-content:center }
   footer { flex-direction:column; text-align:center; padding:28px 20px }
   .foot-links { justify-content:center }
   .s-problem,.s-why,.s-approach,.s-method,.s-reviews { padding:80px 24px }
+  /* Sticky stacking richiede overflow visible sui contenitori */
+  .s-bio { overflow: visible }
+  .s-reviews { overflow: visible }
+  .bio-text-col { overflow: visible }
+  .s-inner { overflow: visible }
   .s-video { padding: 80px 24px }
   .video-layout { grid-template-columns: 1fr; gap: 48px }
   .video-frame { max-width: 320px; margin: 0 auto }
@@ -1927,7 +2013,24 @@ footer small { width:100%; font-size:11px; color:rgba(255,255,255,0.12) }
 <!-- ══ URGENCY BAR ══ -->
 <div class="urgency-bar">
   <div class="ub-pulse"></div>
-  🎟️ Voucher prima visita a <strong>€40</strong> (anziché €70): rimangono solo <strong id="spots">3 posti</strong> questa settimana
+
+  <!-- Versione DESKTOP/TABLET: messaggio completo -->
+  <div class="ub-desktop">
+    <span>🎟️ Voucher prima visita</span>
+    <span class="ub-price-tag">€40</span>
+    <span class="ub-old-price">€70</span>
+    <span>· rimangono</span>
+    <span class="ub-spots" id="spots">3 posti</span>
+    <span>questa settimana</span>
+  </div>
+
+  <!-- Versione MOBILE: messaggio sintetico -->
+  <div class="ub-mobile">
+    <span>🎟️ Voucher</span>
+    <span class="ub-price-tag">€40</span>
+    <span>·</span>
+    <span class="ub-spots" id="spots-mobile">3 posti</span>
+  </div>
 </div>
 
 <!-- ══ NAV ══ -->
@@ -2405,6 +2508,64 @@ footer small { width:100%; font-size:11px; color:rgba(255,255,255,0.12) }
           WhatsApp
         </a>
       </div>
+
+      <!-- Griglia icone riassuntive -->
+      <div class="bio-features rv d4">
+        <div class="bio-feat">
+          <div class="bio-feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="bio-feat-text">
+            <h4>Formazione UK</h4>
+            <p>Master M.Ost RQ a Londra</p>
+          </div>
+        </div>
+        <div class="bio-feat">
+          <div class="bio-feat-icon">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="bio-feat-text">
+            <h4>194 recensioni</h4>
+            <p>Valutazione media ★5.0</p>
+          </div>
+        </div>
+        <div class="bio-feat">
+          <div class="bio-feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="bio-feat-text">
+            <h4>Docente ICOM</h4>
+            <p>Anatomia e clinica</p>
+          </div>
+        </div>
+        <div class="bio-feat">
+          <div class="bio-feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="bio-feat-text">
+            <h4>Approccio umano</h4>
+            <p>Ascolto prima del trattamento</p>
+          </div>
+        </div>
+        <div class="bio-feat">
+          <div class="bio-feat-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="bio-feat-text">
+            <h4>Prima visita 45-60'</h4>
+            <p>Il tempo necessario</p>
+          </div>
+        </div>
+        <div class="bio-feat">
+          <div class="bio-feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 11H1l8-8 8 8h-8v8z" transform="rotate(135 12 12)"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="bio-feat-text">
+            <h4>Causa, non sintomo</h4>
+            <p>Soluzione duratura</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2687,7 +2848,7 @@ document.addEventListener('DOMContentLoaded', processInstagramEmbeds);
 /* ── SPOTS DINAMICI (simula scarsità) ── */
 // Mostra un numero di posti basato sul giorno della settimana
 const spots = [5, 4, 4, 3, 3, 2, 2][new Date().getDay()];
-document.querySelectorAll('#spots, #spots2').forEach(el => el.textContent = spots + ' posti');
+document.querySelectorAll('#spots, #spots-mobile, #spots2').forEach(el => el.textContent = spots + ' posti');
 
 /* ── HOVER MAGNETICO SUI CTA ── */
 document.querySelectorAll('.btn-cta-main, .btn-f-primary, .btn-f-wa, .vc-cta').forEach(btn => {
